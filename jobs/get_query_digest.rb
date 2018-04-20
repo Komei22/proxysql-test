@@ -5,8 +5,10 @@ client = Mysql2::Client.new(host: "127.0.0.1", username: "admin", password: "adm
 
 query_digests = client.query("SELECT * FROM stats_mysql_query_digest")
 
-File.open("./../tmp/query_digest_log", "w") do |f|
+time = Time.now.strftime("%Y-%m-%d-%H:%M:%S")
+
+File.open("./tmp/#{time}_query_digest_log", "w") do |f|
   query_digests.each do |query_digest|
-    f.puts(query_digest)
+    f.puts(query_digest["digest_text"])
   end
 end
