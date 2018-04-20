@@ -33,8 +33,8 @@ mysql_variables=
         connect_timeout_server=3000
 # make sure to configure monitor username and password
 # https://github.com/sysown/proxysql/wiki/Global-variables#mysql-monitor_username-mysql-monitor_password
-        monitor_username="monitor"
-        monitor_password="monitor"
+        monitor_username="root"
+        monitor_password="root"
         monitor_history=600000
         monitor_connect_interval=60000
         monitor_ping_interval=10000
@@ -61,6 +61,12 @@ mysql_users:
         {
                 username = "root"
                 password = "root"
+                default_hostgroup = 0
+                active = 1
+        },
+        {
+                username = "rails_app"
+                password = "rails_app"
                 default_hostgroup = 0
                 active = 1
         }

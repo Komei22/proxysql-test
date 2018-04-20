@@ -4,8 +4,8 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_USER: monitor
-      MYSQL_PASSWORD: monitor
+      MYSQL_USER: rails_app
+      MYSQL_PASSWORD: rails_app
 
   dbproxy:
     image: mysqlboy/docker-proxysql
