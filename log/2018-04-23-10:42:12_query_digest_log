@@ -1,0 +1,74 @@
+UPDATE `users` SET `password_digest` = ? WHERE `users`.`id` = ?
+SELECT `users`.* FROM `users` WHERE `users`.`activated` = ? LIMIT ? OFFSET ?
+SELECT COUNT(*) FROM `users` WHERE `users`.`activated` = ?
+UPDATE `users` SET `reset_sent_at` = ?, `updated_at` = ? WHERE `users`.`id` = ?
+UPDATE `users` SET `reset_digest` = NULL WHERE `users`.`id` = ?
+UPDATE `users` SET `password_digest` = ?, `updated_at` = ? WHERE `users`.`id` = ?
+UPDATE `users` SET `activated` = ?, `updated_at` = ? WHERE `users`.`id` = ?
+UPDATE `users` SET `users`.`reset_digest` = ?, `users`.`reset_sent_at` = ? WHERE `users`.`id` = ?
+SELECT COUNT(*) FROM `users`
+UPDATE `users` SET `name` = ?, `email` = ? WHERE `users`.`id` = ?
+SELECT ? AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = ? LIMIT ?
+SELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = ? LIMIT ? OFFSET ?
+SELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = ?
+SELECT ? AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = ? LIMIT ?
+ROLLBACK TO SAVEPOINT active_record_1
+SELECT `microposts`.* FROM `microposts` WHERE (user_id IN (SELECT followed_id FROM relationships WHERE follower_id = ?) OR user_id = ?) ORDER BY `microposts`.`created_at` DESC LIMIT ? OFFSET ?
+SELECT ? AS one FROM `users` WHERE `users`.`email` = ? AND (`users`.`id` != ?) LIMIT ?
+SELECT `microposts`.* FROM `microposts` WHERE `microposts`.`user_id` = ? AND `microposts`.`id` = ? ORDER BY `microposts`.`created_at` DESC LIMIT ?
+SELECT `microposts`.* FROM `microposts` WHERE (user_id IN (SELECT followed_id FROM relationships WHERE follower_id = ?) OR user_id = ?) ORDER BY `microposts`.`created_at` DESC
+SELECT `relationships`.* FROM `relationships` WHERE `relationships`.`followed_id` = ?
+SELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = ?
+SELECT `relationships`.* FROM `relationships` WHERE `relationships`.`follower_id` = ?
+SELECT `microposts`.* FROM `microposts` WHERE `microposts`.`user_id` = ? ORDER BY `microposts`.`created_at` DESC
+SELECT COUNT(*) FROM `microposts`
+INSERT INTO `microposts` (`content`, `user_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?)
+SELECT `microposts`.* FROM `microposts` WHERE `microposts`.`id` = ? LIMIT ?
+INSERT INTO `users` (`name`, `email`, `created_at`, `updated_at`, `password_digest`, `activation_digest`) VALUES (?, ?, ?, ?, ?, ?)
+DELETE FROM `relationships` WHERE `relationships`.`id` = ?
+SELECT `relationships`.* FROM `relationships` WHERE `relationships`.`follower_id` = ? AND `relationships`.`followed_id` = ? LIMIT ?
+SELECT ? AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = ? AND `users`.`id` = ? LIMIT ?
+SELECT ? AS one FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = ? AND `users`.`id` = ? LIMIT ?
+UPDATE `users` SET `remember_digest` = NULL WHERE `users`.`id` = ?
+SELECT `microposts`.* FROM `microposts` WHERE `microposts`.`user_id` = ? ORDER BY `microposts`.`created_at` DESC LIMIT ? OFFSET ?
+SELECT COUNT(*) FROM `microposts` WHERE `microposts`.`user_id` = ?
+SELECT ? AS one FROM `microposts` WHERE `microposts`.`user_id` = ? LIMIT ?
+SELECT COUNT(*) FROM `microposts` WHERE (user_id IN (SELECT followed_id FROM relationships WHERE follower_id = ?) OR user_id = ?)
+SELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = ?
+SELECT COUNT(*) FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`followed_id` WHERE `relationships`.`follower_id` = ?
+SELECT `relationships`.* FROM `relationships` WHERE `relationships`.`id` = ? LIMIT ?
+UPDATE `users` SET `remember_digest` = ?, `updated_at` = ? WHERE `users`.`id` = ?
+SELECT `users`.* FROM `users` WHERE `users`.`email` = ? LIMIT ?
+SELECT ? AS one FROM `users` WHERE `users`.`email` = ? LIMIT ?
+ROLLBACK
+INSERT INTO `relationships` (`follower_id`, `followed_id`, `created_at`, `updated_at`) VALUES (?, ?, ?, ?)
+SELECT `users`.* FROM `users` WHERE `users`.`id` = ? LIMIT ?
+UPDATE `users` SET `remember_digest` = ? WHERE `users`.`id` = ?
+COMMIT
+SAVEPOINT active_record_1
+INSERT INTO `users` (`name`, `email`, `password_digest`, `activated`, `activated_at`, `created_at`, `updated_at`, `id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO `users` (`name`, `email`, `password_digest`, `admin`, `activated`, `activated_at`, `created_at`, `updated_at`, `id`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+DELETE FROM `users`
+SHOW FULL FIELDS FROM `users`
+INSERT INTO `microposts` (`content`, `user_id`, `created_at`, `updated_at`, `picture`) VALUES (?, ?, ?, ?, ?)
+DELETE FROM `relationships`
+INSERT INTO `relationships` (`created_at`, `updated_at`, `id`, `follower_id`, `followed_id`) VALUES (?, ?, ?, ?, ?)
+SHOW FULL FIELDS FROM `relationships`
+SELECT `users`.* FROM `users` INNER JOIN `relationships` ON `users`.`id` = `relationships`.`follower_id` WHERE `relationships`.`followed_id` = ? LIMIT ? OFFSET ?
+INSERT INTO `microposts` (`content`, `created_at`, `updated_at`, `id`, `user_id`) VALUES (?, ?, ?, ?, ?)
+DELETE FROM `microposts`
+SELECT column_name FROM information_schema.key_column_usage WHERE constraint_name = ? AND table_schema = DATABASE() AND table_name = ? ORDER BY ordinal_position
+SELECT `microposts`.* FROM `microposts` ORDER BY `microposts`.`created_at` DESC LIMIT ?
+UPDATE `users` SET `users`.`activated` = ?, `users`.`activated_at` = ? WHERE `users`.`id` = ?
+DELETE FROM `microposts` WHERE `microposts`.`id` = ?
+SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE()
+SHOW FULL FIELDS FROM `microposts`
+BEGIN
+SET FOREIGN_KEY_CHECKS = ?
+SELECT @@FOREIGN_KEY_CHECKS
+DELETE FROM `users` WHERE `users`.`id` = ?
+SHOW FULL FIELDS FROM `schema_migrations`
+SELECT `schema_migrations`.* FROM `schema_migrations`
+SELECT COUNT(*) FROM `relationships`
+SELECT table_name FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = ?
+SET NAMES utf8, @@SESSION.sql_mode = CONCAT(CONCAT(@@sql_mode, ?), ?), @@SESSION.sql_auto_is_null = ?, @@SESSION.wait_timeout = ?
