@@ -4,6 +4,8 @@ services:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/my.cnf:ro
 
   dbproxy:
     image: mysqlboy/docker-proxysql
