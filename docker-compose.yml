@@ -1,12 +1,21 @@
 version: '3'
 services:
-  db:
+  db1:
     image: mysql:5.7
     environment:
       MYSQL_ROOT_PASSWORD: root
     volumes:
       - ./mysql/my.cnf:/etc/mysql/my.cnf:ro
-
+    ports:
+      - 3306:3306
+  db2:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./mysql/my.cnf:/etc/mysql/my.cnf:ro
+    ports:
+      - 3307:3306
   dbproxy:
     image: mysqlboy/docker-proxysql
     volumes:
@@ -14,3 +23,6 @@ services:
     ports:
       - "6033:6033"
       - "6032:6032"
+    depends_on:
+      - db1
+      - db2

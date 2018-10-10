@@ -1,20 +1,9 @@
-#file proxysql.cfg
-
-# This config file is parsed using libconfig , and its grammar is described in:
-# http://www.hyperrealm.com/libconfig/libconfig_manual.html#Configuration-File-Grammar
-# Grammar is also copied at the end of this file
-
-
-
 datadir="/var/lib/proxysql"
 
 admin_variables=
 {
-        admin_credentials="admin:admin"
-#       mysql_ifaces="127.0.0.1:6032;/tmp/proxysql_admin.sock"
+        admin_credentials="admin:admin;remote_admin:remote_admin"
         mysql_ifaces="0.0.0.0:6032"
-#       refresh_interval=2000
-#       debug=true
 }
 
 mysql_variables=
@@ -25,14 +14,11 @@ mysql_variables=
         default_query_timeout=36000000
         have_compress=true
         poll_timeout=2000
-#       interfaces="0.0.0.0:6033;/tmp/proxysql.sock"
         interfaces="0.0.0.0:6033"
         default_schema="information_schema"
         stacksize=1048576
         server_version="5.5.30"
         connect_timeout_server=3000
-# make sure to configure monitor username and password
-# https://github.com/sysown/proxysql/wiki/Global-variables#mysql-monitor_username-mysql-monitor_password
         monitor_username="root"
         monitor_password="root"
         monitor_history=600000
@@ -51,7 +37,8 @@ mysql_variables=
 # defines all the MySQL servers
 mysql_servers =
 (
-        { address="db" , port=3306 , hostgroup=0 }
+        { address="db1" , port=3306 , hostgroup=0 },
+        { address="db2", port=3306, hostgroup=0 }
 )
 
 
@@ -63,12 +50,6 @@ mysql_users:
                 password = "root"
                 default_hostgroup = 0
                 active = 1
-        },
-        {
-                username = "rails_app"
-                password = "rails_app"
-                default_hostgroup = 0
-                active = 1
         }
 )
 
@@ -77,6 +58,15 @@ mysql_users:
 #defines MySQL Query Rules
 mysql_query_rules:
 (
+        {
+                rule_id=1
+                active=1
+                match_pattern="."
+                destination_hostgroup=0
+                mirror_hostgroup=0
+                apply=0
+
+        }
 #       {
 #               rule_id=1
 #               active=1
@@ -123,32 +113,3 @@ mysql_replication_hostgroups=
 #        }
 )
 
-
-
-
-# http://www.hyperrealm.com/libconfig/libconfig_manual.html#Configuration-File-Grammar
-#
-# Below is the BNF grammar for configuration files. Comments and include directives are not part of the grammar, so they are not included here.
-#
-# configuration = setting-list | empty
-#
-# setting-list = setting | setting-list setting
-#
-# setting = name (":" | "=") value (";" | "," | empty)
-#
-# value = scalar-value | array | list | group
-#
-# value-list = value | value-list "," value
-#
-# scalar-value = boolean | integer | integer64 | hex | hex64 | float
-#                | string
-#
-# scalar-value-list = scalar-value | scalar-value-list "," scalar-value
-#
-# array = "[" (scalar-value-list | empty) "]"
-#
-# list = "(" (value-list | empty) ")"
-#
-# group = "{" (setting-list | empty) "}"
-#
-# empty =
